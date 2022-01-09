@@ -1,0 +1,4 @@
+* @gurley
+*.js @gurley
+*.yml @gurley
+/public/ @gurley
