@@ -36,9 +36,10 @@ jobs:
         run: npm run build
       # - run: npm install -g surge
       - name: Upload Build Folder
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v2
         with:
-          build: build
+          name: build
           path: build
       # - uses: actions/download-artifict@v2
       - name: Deploy to Staging
