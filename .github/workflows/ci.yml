@@ -26,10 +26,21 @@ jobs:
       - run: npm test -- --coverage
         env:
           CI: true
+      - name: Upload Test Coverage
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: coverage
       - name: Build Project
         if: github.event_name == 'push'
         run: npm run build
       # - run: npm install -g surge
+      - name: Upload Build Folder
+        uses: actions/upload-artifact@v2
+        with:
+          build: build
+          path: build
+      # - uses: actions/download-artifict@v2
       - name: Deploy to Staging
         if: github.event_name == 'push'
         run: npx surge --project ./build --domain dynamic-woman2323222222222222.surge.sh
