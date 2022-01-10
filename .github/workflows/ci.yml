@@ -7,6 +7,9 @@ on:
 
 jobs:
   build:
+    env:
+      SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
+      SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -29,7 +32,7 @@ jobs:
       - name: Upload Test Coverage
         uses: actions/upload-artifact@v2
         with:
-          name: code-coverage
+          name: coverage
           path: coverage
       - name: Build Project
         if: github.event_name == 'push'
@@ -53,8 +56,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
       - name: Deploy to Staging
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
         run: npx surge --project ./build --domain dynamic-woman2323222222222222.surge.sh
+      - name: Deploy to Production
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx surge --project ./build --domain homely-slopedfdfdfdfd.surge.sh
+      - name: Upload Coverage Reports
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx codecov
         env:
-          SURGE_LOGIN: ${{secrets.SURGE_LOGIN}}
-          SURGE_TOKEN: ${{secrets.SURGE_TOKEN}}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN}}
