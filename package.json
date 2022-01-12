@@ -20,11 +20,6 @@
     "format": "prettier --write \"**/*.{js, jsx,yml,yaml,json,css,scss,md}\"",
     "prepare": "husky install"
   },
-  "husky": {
-    "hooks": {
-      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true"
-    }
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
