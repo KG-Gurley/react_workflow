@@ -9,4 +9,4 @@ jobs:
         with:
           who-to-greet: 'World Again!'
       - run: |
-          echo "Time: ${{steps.hello.outpus.time}}"
+          echo "Time: ${{steps.hello.outputs.time}}"
