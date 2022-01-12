@@ -8445,9 +8445,9 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 try {
+  throw new Error('error message');
   const name = core.getInput('who-to-greet');
   console.log(`Hello ${name}`);
-  //   throw new Error('error message');
 
   const time = new Date();
   core.setOutput('time', time.toTimeString());
